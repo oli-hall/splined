@@ -1,4 +1,4 @@
-var numPoints = 15;
+var numPoints = 20;
 var points = new Array(numPoints);
 var noise = 1;
 var width = -1;
@@ -24,7 +24,6 @@ Point.prototype.addNoise = function(noise) {
     this.y = move(this.y, 0, height, noise);
 };
 
-// this is not random
 function randomInt(min, max) {
     return min + ((max-min) * Math.random());
 }
@@ -38,7 +37,7 @@ function generatePoints(x, y) {
 
 function updatePoints(points) {
     for (i = 1; i < points.length - 1; i++) {
-        points[i].addNoise(i * noise)
+        points[i].addNoise(noise)
     }
 }
 
@@ -71,6 +70,8 @@ function draw() {
     if (!running) {
         return;
     }
+    // ctx.clearRect(0, 0, width, height);
+    // ctx.beginPath();
     updatePoints(points)
 
     ctx.moveTo(points[0].x, points[0].y);
@@ -94,6 +95,4 @@ function draw() {
     
     ctx.strokeStyle= 'rgba(0, 0, 0, 0.006)';
     ctx.stroke();
-
-    // window.requestAnimationFrame(draw);
 }
